@@ -8,3 +8,5 @@
 Temp/
 Library/
 obj/
+Assets/Forge/Editor
+Assets/Forge/Editor.meta
