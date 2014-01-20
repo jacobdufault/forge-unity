@@ -163,10 +163,7 @@ namespace Forge.Unity {
         /// </summary>
         protected void OnDestroy() {
             _containers.Remove(GetEntityId());
-
-            if (LevelDesigner.HasInstance) {
-                NotifyLevelDesignerOfDestruction();
-            }
+            NotifyLevelDesignerOfDestruction();
         }
 
         /// <summary>

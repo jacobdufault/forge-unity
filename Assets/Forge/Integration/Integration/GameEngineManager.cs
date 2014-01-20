@@ -19,20 +19,26 @@ namespace Forge.Unity {
 
         public ForgeDependencyComponent Dependencies;
 
+        private LevelDesigner _levelDesigner {
+            get {
+                return gameObject.GetComponentInParent<LevelDesigner>();
+            }
+        }
+
         /// <summary>
         /// Returns the ITemplateGroup JSON that the engine will be loaded with.
         /// </summary>
-        protected static string GetTemplateJson() {
+        protected string GetTemplateJson() {
             // get the saved level JSON or read it from the file
-            string levelJson = LevelDesigner.Instance.SavedLevelTemplateState;
+            string levelJson = _levelDesigner.SavedLevelTemplateState;
             if (string.IsNullOrEmpty(levelJson)) {
-                levelJson = File.ReadAllText(LevelDesigner.Instance.LevelTemplatePath);
+                levelJson = File.ReadAllText(_levelDesigner.LevelTemplatePath);
             }
 
             // get the saved shared JSON or read it from the file
-            string sharedJson = LevelDesigner.Instance.SavedSharedTemplateState;
+            string sharedJson = _levelDesigner.SavedSharedTemplateState;
             if (string.IsNullOrEmpty(sharedJson)) {
-                sharedJson = File.ReadAllText(LevelDesigner.Instance.SharedTemplatePath);
+                sharedJson = File.ReadAllText(_levelDesigner.SharedTemplatePath);
             }
 
             return LevelManager.MergeTemplateGroups(
@@ -45,10 +51,10 @@ namespace Forge.Unity {
         /// <summary>
         /// Returns the IGameSnapshot JSON that the engine will be loaded with.
         /// </summary>
-        protected static string GetSnapshotJson() {
-            string snapshotJson = LevelDesigner.Instance.SavedSnapshotState;
+        protected string GetSnapshotJson() {
+            string snapshotJson = _levelDesigner.SavedSnapshotState;
             if (string.IsNullOrEmpty(snapshotJson)) {
-                snapshotJson = File.ReadAllText(LevelDesigner.Instance.SnapshotPath);
+                snapshotJson = File.ReadAllText(_levelDesigner.SnapshotPath);
             }
 
             return snapshotJson;

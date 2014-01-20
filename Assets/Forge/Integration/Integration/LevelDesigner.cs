@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Forge.Unity {
     [ExecuteInEditMode]
-    public class LevelDesigner : SingletonBehavior<LevelDesigner, LevelDesigner> {
+    public class LevelDesigner : MonoBehaviour {
         /// <summary>
         /// The starting id for the shared template group.
         /// </summary>

@@ -48,7 +48,10 @@ namespace Forge.Unity {
         }
 
         protected override void NotifyLevelDesignerOfDestruction() {
-            LevelDesigner.Instance.OnEntityDestroyed(this);
+            var designer = gameObject.GetComponentInParent<LevelDesigner>();
+            if (designer != null) {
+                designer.OnEntityDestroyed(this);
+            }
         }
 
         protected override void Initialize(IEntity entity) {

@@ -32,7 +32,10 @@ namespace Forge.Unity {
         }
 
         protected override void NotifyLevelDesignerOfDestruction() {
-            LevelDesigner.Instance.OnTemplateDestroyed(Template);
+            var designer = gameObject.GetComponentInParent<LevelDesigner>();
+            if (designer != null) {
+                designer.OnTemplateDestroyed(Template);
+            }
         }
 
         protected override void Initialize(ITemplate template) {
