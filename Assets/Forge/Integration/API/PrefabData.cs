@@ -12,8 +12,15 @@ namespace Forge.Unity {
         /// The prefab to use for getting the base GameObject that will render the IEntity instance
         /// that this data instance is attached to.
         /// </summary>
-        // TODO: this should also contain the prefab GUID
         [JsonProperty("PrefabResourcePath")]
         public string PrefabResourcePath;
+
+        /// <summary>
+        /// The GUID that identifies that asset. If AssetGuid and PrefabResourcePath point to
+        /// different resources, then the element at PrefabResourcePath is prioritized. The
+        /// AssetGuid is a (hopefully) more stable identifier than the PrefabResourcePath.
+        /// </summary>
+        [JsonProperty("PrefabGuid")]
+        public string PrefabGuid;
     }
 }
