@@ -8,6 +8,7 @@ namespace Forge.Unity {
     internal static class ForgeEditorUtils {
         public static GUIStyle HeaderStyle;
         public static GUIStyle BoldStyle;
+        public static GUIStyle RegularStyle;
 
         /// <summary>
         /// True if the Forge.Editing package is currently loaded. If this is false, then we display
@@ -29,12 +30,20 @@ namespace Forge.Unity {
                 ? new Color(0.8f, 0.8f, 0.8f)
                 : new Color(0.2f, 0.2f, 0.2f);
             HeaderStyle.fontSize = 16;
+            HeaderStyle.margin = new RectOffset(5, 0, 0, 0);
 
             BoldStyle = new GUIStyle();
             BoldStyle.normal.textColor = EditorGUIUtility.isProSkin
                 ? new Color(0.8f, 0.8f, 0.8f)
                 : new Color(0.2f, 0.2f, 0.2f);
             BoldStyle.fontStyle = FontStyle.Bold;
+            BoldStyle.margin = new RectOffset(5, 0, 0, 0);
+
+            RegularStyle = new GUIStyle();
+            RegularStyle.normal.textColor = EditorGUIUtility.isProSkin
+                ? new Color(0.8f, 0.8f, 0.8f)
+                : new Color(0.2f, 0.2f, 0.2f);
+            RegularStyle.margin = new RectOffset(5, 0, 0, 0);
         }
 
         /// <summary>
