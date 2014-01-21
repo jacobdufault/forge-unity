@@ -9,6 +9,7 @@ namespace Forge.Unity {
         public static GUIStyle HeaderStyle;
         public static GUIStyle BoldStyle;
         public static GUIStyle RegularStyle;
+        public static GUIStyle BackgroundStyle;
 
         /// <summary>
         /// True if the Forge.Editing package is currently loaded. If this is false, then we display
@@ -44,6 +45,16 @@ namespace Forge.Unity {
                 ? new Color(0.8f, 0.8f, 0.8f)
                 : new Color(0.2f, 0.2f, 0.2f);
             RegularStyle.margin = new RectOffset(5, 0, 0, 0);
+
+            Texture2D texture = new Texture2D(1, 1);
+            texture.SetPixel(0, 0, EditorGUIUtility.isProSkin
+                ? Color.green
+                : new Color(0.9f, 0.9f, 0.9f));
+            texture.wrapMode = TextureWrapMode.Repeat;
+            texture.Apply();
+
+            BackgroundStyle = new GUIStyle();
+            BackgroundStyle.normal.background = texture;
         }
 
         /// <summary>
@@ -64,12 +75,28 @@ namespace Forge.Unity {
             return container.QueryableEntity;
         }
 
+        private const float Indent = 15f;
+
+        public static Rect IndentedRect(Rect source) {
+            return new Rect(source.x + Indent, source.y, source.width - Indent, source.height);
+        }
+
+        public static string TextField(string label, string value) {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label(label, GUILayout.ExpandWidth(false));
+            string updated = EditorGUILayout.TextField(value, GUILayout.ExpandWidth(true));
+            EditorGUILayout.EndHorizontal();
+            return updated;
+        }
+
         public static void DrawSeperator() {
-            // TODO: make some of the separators draggable
-            if (GUILayout.RepeatButton("", GUI.skin.FindStyle("Box"), GUILayout.Height(4), GUILayout.ExpandWidth(true))) {
-                Debug.Log("Pressing " + Event.current.mousePosition);
-            }
-            //GUILayout.Box("", GUILayout.Height(4), GUILayout.ExpandWidth(true));
+            DrawSeperator(0);
+        }
+
+        public static void DrawSeperator(float spacePixels) {
+            GUILayout.Space(spacePixels);
+            GUILayout.Box("", GUILayout.Height(4), GUILayout.ExpandWidth(true));
+            GUILayout.Space(spacePixels);
         }
 
         public static bool DrawFoldout(bool current) {
@@ -90,10 +117,22 @@ namespace Forge.Unity {
             EditorGUI.EndDisabledGroup();
         }
 
+        public static void HorizontalGroup(GUIStyle style, Action code, params GUILayoutOption[] options) {
+            GUILayout.BeginHorizontal(style, options);
+            code();
+            GUILayout.EndHorizontal();
+        }
+
         public static void HorizontalGroup(Action code, params GUILayoutOption[] options) {
             GUILayout.BeginHorizontal(options);
             code();
             GUILayout.EndHorizontal();
+        }
+
+        public static void VerticalGroup(GUIStyle style, Action code, params GUILayoutOption[] options) {
+            GUILayout.BeginVertical(style, options);
+            code();
+            GUILayout.EndVertical();
         }
 
         public static void VerticalGroup(Action code, params GUILayoutOption[] options) {
