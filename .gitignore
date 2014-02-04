@@ -1,12 +1,2 @@
-*.sln
-*.suo
-*.csproj
-*.unityproj
-*.DotSettings
-*.pidb
-*.userprefs
-Temp/
-Library/
-obj/
-Assets/FullInspector/
-Assets/FullInspector.meta
+FullInspector
+FullInspector.meta

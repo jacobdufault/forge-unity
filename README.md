@@ -8,27 +8,17 @@ This project is open source under the MIT license.
 
 Using Forge in Unity is simple.
 
-### New Project
-If you just want to test Forge out, this repository contains a full Unity 4.3 project.
-
-1. Download this repository (git clone or the zip download on the sidebar in github)
-2. Open an existing Unity project pointed at the downloaded package
-3. Select `Forge` in the menu and then `Create Level`
-
-### Existing Project
-If you're using Forge in a preexisting project, it's a little bit more complicated, but not much.
-
-1. Copy `Assets/forge` into your project
-2. Make sure that you're using .NET 2.0 (not the subset). You can change this by following:
+1. Create a new Unity 4.3 project or open an existing one
+2. Copy `Forge` into your `Assets` directory
+3. Make sure that you're using .NET 2.0 (not the subset). You can change this by following:
   1. Select `Edit` in the menu
   2. Select `Project Settings`
   3. Select `Player`
   4. Select `Other Settings` in the player menu
   5. Select `Api Compatibility Level` and set it to `.NET 2.0` (not .NET 2.0 Subset)
-3. Restart Unity (to reload the menu so that `Forge` appears)
-4. Select `Forge` in the menu and then `Create Level`
+4. Restart Unity (to reload the menu so that `Forge` appears)
+5. Select `Forge` in the menu and then `Create Level`
 
-## Forge Editor
+## Inspector / Editor Support
 
-This package only provides the core Unity runtime bindings. To get the full Forge experience, you need the Forge Editor which will be available in the Unity Asset Store soon.
- 
+This package contains all of the Forge Unity integration experience, but the editing aspects of Forge Unity require the [Full Inspector](http://jacobdufault.github.io/fullinspector/). It will be available on the Unity Asset Store soon.
