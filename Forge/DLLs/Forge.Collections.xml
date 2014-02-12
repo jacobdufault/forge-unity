@@ -342,12 +342,12 @@
         </member>
         <member name="M:Forge.Collections.QuadTree`1.GetChunk(System.Int32,System.Int32)">
             <summary>
-            Returns the chunk located at the given x and z world coordinates.
+            Returns the chunk located at the given x and y world coordinates.
             </summary>
         </member>
         <member name="M:Forge.Collections.QuadTree`1.GenerateChunk(System.Int32,System.Int32)">
             <summary>
-            Creates a new chunk located at the given x and z index coordinates.
+            Creates a new chunk located at the given x and y index coordinates.
             </summary>
         </member>
         <member name="M:Forge.Collections.QuadTree`1.GrowArray``1(``0[0:,0:],System.Int32,System.Int32,System.Func{System.Int32,System.Int32,``0})">
@@ -558,9 +558,9 @@
             value of 100 here means that 100 units of the world map correspond to 1 unit the index
             map.</param>
             <param name="xWorld">The x coordinate on the world.</param>
-            <param name="zWorld">The z coordinate on the world.</param>
+            <param name="yWorld">The y coordinate on the world.</param>
             <param name="xIndex">The x coordinate on the index map.</param>
-            <param name="zIndex">The z coordinate on the index map.</param>
+            <param name="yIndex">The y coordinate on the index map.</param>
         </member>
         <member name="M:Forge.Collections.WorldIndexCoordinateTransform.MapWorldToIndex(System.Int32,System.Int32)">
             <summary>
@@ -581,9 +581,9 @@
             value of 100 here means that 100 units of the world map correspond to 1 unit the index
             map.</param>
             <param name="xIndex">The x index coordinate.</param>
-            <param name="zIndex">The z index coordinate.</param>
+            <param name="yIndex">The y index coordinate.</param>
             <param name="xWorld">The x world coordinate.</param>
-            <param name="zWorld">The z world coordinate.</param>
+            <param name="yWorld">The y world coordinate.</param>
         </member>
         <member name="M:Forge.Collections.WorldIndexCoordinateTransform.MapIndexToWorld(System.Int32,System.Int32)">
             <summary>

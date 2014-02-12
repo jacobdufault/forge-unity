@@ -144,7 +144,7 @@ namespace Forge.Editing {
     public class Vector2rPropertyEditor : PropertyEditor<Vector2r> {
         public override Vector2r Edit(Rect region, GUIContent label, Vector2r element) {
             Vector2 updated = EditorGUI.Vector2Field(region, label,
-                new Vector2(element.X.AsFloat, element.Z.AsFloat));
+                new Vector2(element.X.AsFloat, element.Y.AsFloat));
 
             return new Vector2r(updated.x, updated.y);
         }
