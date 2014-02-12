@@ -1,5 +1,6 @@
 ﻿using Forge.Entities;
 using Forge.Unity;
+using Forge.Utilities;
 using FullInspector;
 using UnityEditor;
 using UnityEngine;
@@ -124,6 +125,32 @@ namespace Forge.Editing {
 
         public override float GetElementHeight(GUIContent label, ITemplate element) {
             return EditorStyles.objectField.CalcHeight(label, 100);
+        }
+    }
+
+    [CustomPropertyEditor(typeof(Real))]
+    public class RealPropertyEditor : PropertyEditor<Real> {
+        public override Real Edit(Rect region, GUIContent label, Real element) {
+            float updated = EditorGUI.FloatField(region, label, element.AsFloat);
+            return Real.Create(updated);
+        }
+
+        public override float GetElementHeight(GUIContent label, Real element) {
+            return EditorStyles.label.CalcHeight(label, 1000);
+        }
+    }
+
+    [CustomPropertyEditor(typeof(Vector2r))]
+    public class Vector2rPropertyEditor : PropertyEditor<Vector2r> {
+        public override Vector2r Edit(Rect region, GUIContent label, Vector2r element) {
+            Vector2 updated = EditorGUI.Vector2Field(region, label,
+                new Vector2(element.X.AsFloat, element.Z.AsFloat));
+
+            return new Vector2r(updated.x, updated.y);
+        }
+
+        public override float GetElementHeight(GUIContent label, Vector2r element) {
+            return EditorStyles.label.CalcHeight(label, 1000) * 2;
         }
     }
 }

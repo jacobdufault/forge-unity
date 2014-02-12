@@ -76,8 +76,7 @@ namespace Forge.Unity {
             // create template containers -- this will be a separate island reference from the
             // engine's templates, but the runtime templates are immutable, so it shouldn't matter
             // TODO: examine the maybe
-            TemplateContainer.CreateContainers(LevelManager.LoadTemplateGroup(templateJson).Value,
-                TemplatesChild);
+            TemplateContainer.CreateContainers(LevelManager.LoadTemplateGroup(templateJson), TemplatesChild);
         }
 
         protected void OnDisable() {

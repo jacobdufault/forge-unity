@@ -171,8 +171,7 @@ namespace Forge.Unity {
         /// Imports shared templates using the given template JSON.
         /// </summary>
         public void ImportSharedTemplates(string templateJson) {
-            // TODO: examine the maybe
-            SharedTemplates = LevelManager.LoadTemplateGroup(templateJson).Value;
+            SharedTemplates = LevelManager.LoadTemplateGroup(templateJson);
             SavedSharedTemplateState = templateJson;
 
             TemplateContainer.ClearContainers(SharedTemplatesChild);
@@ -183,8 +182,7 @@ namespace Forge.Unity {
         /// Imports level templates using the given template JSON.
         /// </summary>
         public void ImportLevelTemplates(string templateJson) {
-            // TODO: examine the maybe
-            LevelTemplates = LevelManager.LoadTemplateGroup(templateJson).Value;
+            LevelTemplates = LevelManager.LoadTemplateGroup(templateJson);
             SavedLevelTemplateState = templateJson;
 
             TemplateContainer.ClearContainers(LevelTemplatesChild);
@@ -192,8 +190,7 @@ namespace Forge.Unity {
         }
 
         public void ImportSnapshot(string snapshotJson) {
-            // TODO: examine the maybe
-            Snapshot = LevelManager.LoadSnapshot(snapshotJson, EmptySerializedTemplateGroup).Value;
+            Snapshot = LevelManager.LoadSnapshot(snapshotJson, EmptySerializedTemplateGroup);
             SavedSnapshotState = snapshotJson;
 
             EntityContainer.ClearContainers(gameObject);

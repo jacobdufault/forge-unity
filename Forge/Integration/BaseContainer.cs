@@ -1,4 +1,5 @@
 ﻿using Forge.Entities;
+using Forge.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -53,6 +54,7 @@ namespace Forge.Unity {
             // resource and clone it instead of creating a new object
             if (entity.ContainsData<PrefabData>()) {
                 string resourcePath = entity.Current<PrefabData>().PrefabResourcePath;
+
                 GameObject prefab = (GameObject)Resources.Load(resourcePath);
                 if (prefab == null) {
                     created = new GameObject("");

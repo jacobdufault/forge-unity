@@ -1,4 +1,6 @@
 ﻿using Forge.Entities;
+using Forge.Entities.Implementation;
+using Forge.Unity;
 using Forge.Utilities;
 using FullInspector;
 using System;
@@ -176,10 +178,20 @@ namespace Forge.Editing {
     /// are automatically loaded (which are found by searching all loaded assemblies).
     /// </summary>
     public class GenericDataInspector : IDataInspector {
+        static GenericDataInspector() {
+            // we don't want to allow the user to modify the current OperationMode of the data
+            // instance
+            TypeCache.FindTypeMetadata(typeof(DataBase)).RemoveProperty("OperationMode");
+        }
+
         void IDataInspector.Edit(Data.IData data, GameObject context) {
             TypeMetadata metadata = TypeCache.FindTypeMetadata(data.GetType());
 
             foreach (var property in metadata.Properties) {
+                if (ForgeEditorUtils.GetAttribute<HiddenAttribute>(property.MemberInfo) != null) {
+                    continue;
+                }
+
                 EditProperty(data, property);
             }
         }
