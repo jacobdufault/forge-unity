@@ -1125,6 +1125,24 @@
             Event notifying listeners that the entity has been destroyed.
             </summary>
         </member>
+        <member name="T:Forge.Entities.InvalidDataReadException">
+            <summary>
+            Exception thrown when a data instance has been read from but it is read-only. This is thrown
+            by client code.
+            </summary>
+        </member>
+        <member name="T:Forge.Entities.InvalidDataWriteException">
+            <summary>
+            Exception thrown when a data instance has been written to but it is not modifiable. This is
+            thrown by client code.
+            </summary>
+        </member>
+        <member name="T:Forge.Entities.DeserializationException">
+            <summary>
+            Exception thrown when a deserialization error has occurred. This is most likely during a
+            level load.
+            </summary>
+        </member>
         <member name="T:Forge.Entities.AlreadyAddedDataException">
             <summary>
             Exception thrown when a data type is added to an entity, but the entity already contains an
@@ -1193,7 +1211,7 @@
             a modifiable state.
             </summary>
         </member>
-        <member name="F:Forge.Entities.Implementation.Runtime.VersionedDataContainer.Items">
+        <member name="F:Forge.Entities.Implementation.Runtime.VersionedDataContainer._items">
             <summary>
             All stored immutable data items.
             </summary>
@@ -1250,9 +1268,77 @@
             entity would not go through its life-cycle.
             </summary>
         </member>
+        <member name="T:Forge.Entities.Implementation.DataBase">
+            <summary>
+            The base type for Data instances.
+            </summary>
+        </member>
+        <member name="M:Forge.Entities.Implementation.DataBase.AssertCanRead">
+            <summary>
+            Asserts that the current data instance supports reading values.
+            </summary>
+        </member>
+        <member name="M:Forge.Entities.Implementation.DataBase.AssertCanWrite">
+            <summary>
+            Asserts that the current data instances support writing values.
+            </summary>
+        </member>
+        <member name="M:Forge.Entities.Implementation.DataBase.AssertCanRead(System.String)">
+            <summary>
+            Asserts that the current data instance supports reading values.
+            </summary>
+            <param name="message">Additional error message information</param>
+        </member>
+        <member name="M:Forge.Entities.Implementation.DataBase.AssertCanWrite(System.String)">
+            <summary>
+            Asserts that the current data instances support writing values.
+            </summary>
+            <param name="message">Additional error message information</param>
+        </member>
+        <member name="P:Forge.Entities.Implementation.DataBase.OperationMode">
+            <summary>
+            What kind of operations does this data instance currently support?
+            </summary>
+        </member>
+        <member name="T:Forge.Entities.Data.OperationMode">
+            <summary>
+            The operation mode specifies how a data instance can be used. For example, a modifiable
+            data instance will have its operation mode be write only, but the current and previous
+            data instances will be in a read only operation mode.
+            </summary>
+            <remarks>
+            This allows for custom data instances to do verification that APIs are being used
+            correctly in appropriate times.
+            </remarks>
+        </member>
+        <member name="F:Forge.Entities.Data.OperationMode.Unset">
+            <summary>
+            The operation mode has not been set.
+            </summary>
+        </member>
+        <member name="F:Forge.Entities.Data.OperationMode.ReadOnly">
+            <summary>
+            The data instance can only be read from -- it should not be modified.
+            </summary>
+        </member>
+        <member name="F:Forge.Entities.Data.OperationMode.WriteOnly">
+            <summary>
+            The data instance can only be written to -- it should not be read from.
+            </summary>
+        </member>
+        <member name="F:Forge.Entities.Data.OperationMode.ReadWrite">
+            <summary>
+            The data instance supports both reading and writing.
+            </summary>
+        </member>
         <member name="M:Forge.Entities.Data.IData.Duplicate">
             <summary>
             Return an exact copy of this data instance.
+            </summary>
+        </member>
+        <member name="P:Forge.Entities.Data.IData.OperationMode">
+            <summary>
+            What kind of operations does this data instance currently support?
             </summary>
         </member>
         <member name="M:Forge.Entities.Data.NonVersioned.Duplicate">
@@ -1439,6 +1525,7 @@
             <param name="groups">The template groups to merge.</param>
             <returns>A single template group that contains all of the templates within the given
             groups.</returns>
+            <exception cref="T:System.InvalidOperationException">There were duplicate TemplateIds</exception>
         </member>
         <member name="M:Forge.Entities.LevelManager.SaveSnapshot(Forge.Entities.IGameSnapshot)">
             <summary>
@@ -1455,12 +1542,16 @@
             Loads an IGameSnapshot from the given JSON and the given template group. The JSON should
             have been generated by calling SaveSnapshot.
             </summary>
+            <exception cref="T:Forge.Entities.DeserializationException">An error loading the snapshot
+            occurred.</exception>
         </member>
         <member name="M:Forge.Entities.LevelManager.LoadTemplateGroup(System.String)">
             <summary>
             Loads an ITemplateGroup from the given JSON. The JSON should have been generated by
             calling SaveTemplates.
             </summary>
+            <exception cref="T:Forge.Entities.DeserializationException">An error loading the group
+            occurred.</exception>
         </member>
         <member name="T:Forge.Entities.SystemExecutionOrdering">
             <summary>
