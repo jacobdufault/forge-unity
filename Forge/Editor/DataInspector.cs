@@ -188,7 +188,7 @@ namespace Forge.Editing {
             TypeMetadata metadata = TypeCache.FindTypeMetadata(data.GetType());
 
             foreach (var property in metadata.Properties) {
-                if (ForgeEditorUtils.GetAttribute<HiddenAttribute>(property.MemberInfo) != null) {
+                if (ForgeEditorUtils.GetAttribute<HideInInspector>(property.MemberInfo) != null) {
                     continue;
                 }
 
