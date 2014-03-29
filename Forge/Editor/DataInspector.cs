@@ -212,7 +212,7 @@ namespace Forge.Editing {
             }
 
             // edit the field
-            IPropertyEditor propertyEditor = PropertyEditor.Get(property.StorageType);
+            IPropertyEditor propertyEditor = PropertyEditor.Get(property.StorageType, property.MemberInfo);
 
             object currentValue = property.Read(data);
 
